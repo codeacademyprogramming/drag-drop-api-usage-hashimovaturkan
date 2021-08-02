@@ -72,6 +72,7 @@ function dragging(){
     
     div.addEventListener("dragover",(e)=>{
         e.preventDefault();
+
         
     })
     div.addEventListener("dragstart",(e)=>{
@@ -79,12 +80,17 @@ function dragging(){
     })
     div.addEventListener("dragenter",(e)=>{
         e.preventDefault();
-        console.log("a")
     }, false)
-    uploading.addEventListener("drop",(e)=>{
+
+    div.addEventListener("drop",(e)=>{
         const newDiv = document.getElementById(e.dataTransfer.getData("text"));
+        if(e.offsetX>74){
+            div.parentNode.insertBefore(newDiv,div.nextSibling);
+        }
+        else if(e.offsetX<74){
+            div.parentNode.insertBefore(newDiv,div);
+        }
         
-        // div.parentNode.insertBefore(newDiv,div)
     })
     
     
