@@ -1,0 +1,35 @@
+main{
+    padding-top: 30px;
+}
+input{
+    display: none;
+}
+.drop-container{
+    box-sizing: border-box;
+    border: dashed;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    text-align: center;
+    
+}
+.uploading{
+    padding-top: 60px;
+}
+.img-box{
+    width: 120px;
+    height: 120px;
+    background-repeat: no-repeat;
+    /* cover */
+    background-size: contain; 
+    background-position: center;
+    margin: 10px;
+}
+.bin-box{
+    display: flex;
+    justify-content: flex-end;
+}
+.bin{
+    padding: 10px;
+}

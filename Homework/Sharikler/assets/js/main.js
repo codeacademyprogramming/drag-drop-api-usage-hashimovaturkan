@@ -1,5 +1,4 @@
-
-// TODO ITEM CODE
+// // TODO ITEM CODE
 // const todoItems = [...document.querySelectorAll('.todo-item')];
 // const zones = Array.from(document.querySelectorAll('.drop-zone'));
 
@@ -42,6 +41,7 @@
 
 
 // SHARIK-LER CODE
+// Boyuknen kicikler yerdeyisir
 const colorBoxes = document.querySelectorAll('span');
 const littleColorBoxes = document.querySelectorAll('.little-color-circle');
 const bigBox = document.querySelector('.result-color-circle');
@@ -57,13 +57,15 @@ colorBoxes.forEach(colorBox => {
 
 littleColorBoxes.forEach(littleColorBox => {
     littleColorBox.addEventListener('dragstart', (e) => {
+        const id = littleColorBox.getAttribute('id');
         const red = +littleColorBox.getAttribute('data-red');
         const green = +littleColorBox.getAttribute('data-green');
         const blue = +littleColorBox.getAttribute('data-blue');
         const data = {
             red,
             green,
-            blue
+            blue,
+            id
         };
         e.dataTransfer.setData('text', JSON.stringify(data));
     });
@@ -75,14 +77,25 @@ bigBox.addEventListener('dragover', (e) => {
 
 bigBox.addEventListener('drop', (e) => {
     e.preventDefault();
-    const { red, green, blue } = JSON.parse(e.dataTransfer.getData('text'));
+    const { red, green, blue, id } = JSON.parse(e.dataTransfer.getData('text'));
     const bigBoxRed = +bigBox.getAttribute('data-red');
     const bigBoxGreen = +bigBox.getAttribute('data-green');
     const bigBoxBlue = +bigBox.getAttribute('data-blue');
 
+    console.log(bigBox.style.backgroundColor);
+    console.log(red, green, blue);
+
+    const littleBox = document.querySelector(`#${id}`);
+
+    littleBox.style.backgroundColor = `rgb(${bigBoxRed}, ${bigBoxGreen}, ${bigBoxBlue})`;
+
     const resultRed = (red + bigBoxRed) / 2;
     const resultGreen = (green + bigBoxGreen) / 2;
     const resultBlue = (blue + bigBoxBlue) / 2;
+
+    bigBox.setAttribute("data-red",resultRed);
+    bigBox.setAttribute("data-green",resultGreen);
+    bigBox.setAttribute("data-blue",resultBlue);
 
     bigBox.style.backgroundColor = `rgb(${resultRed}, ${resultGreen}, ${resultBlue})`;
 });
